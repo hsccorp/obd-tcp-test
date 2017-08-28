@@ -16,9 +16,22 @@
   </ion-list>
 
 
-  <button ion-button (click)="start()">Start</button><button ion-button (click)="stop()" color="danger">Stop</button>
-  <br/>
-  speed: {{speed}}, temp: {{temp}}
+  <button ion-button (click)="start()">Start</button><button ion-button (click)="stop()" color="danger">Stop</button><button ion-button (click)="change()">Change</button>
 
- 
+
+
+  <br/>
+
+
+  <ion-grid>
+    <ion-row wrap>
+      <ion-col col-50>
+         <google-chart #speed [data]="gaugeChartData" (chartReady)="ready($event)"></google-chart>
+      </ion-col>
+      <ion-col col-50>
+         <google-chart #temp [data]="tempChartData" (chartReady)="ready($event)"></google-chart>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

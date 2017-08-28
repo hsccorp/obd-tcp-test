@@ -35,6 +35,7 @@
         "ionic-angular": "3.6.0",
         "ionic-plugin-keyboard": "^2.2.1",
         "ionicons": "3.0.0",
+        "ng2-google-charts": "^3.1.0",
         "obd-bluetooth-tcp": "git+https://github.com/hsccorp/node-bluetooth-tcp-obd.git",
         "rxjs": "5.4.0",
         "sw-toolbox": "3.6.0",
