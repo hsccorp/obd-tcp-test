@@ -18,25 +18,28 @@ export class HomePage {
   speed: string = "";
   temp: string = "";
   
+
   @ViewChild('speed') speedChart;
   @ViewChild('temp') tempChart;
+  @ViewChild('rpm') rpmChart;
+  @ViewChild('load') loadChart;
+  @ViewChild('map') mapChart;
+  @ViewChild('fuel') fuelChart;
 
-   gaugeChartData:any =  {
+
+   speedChartData:any =  {
     chartType: 'Gauge',
     dataTable: [
       ['Label', 'Value'],
       ['Speed', 0],
-
-
     ],
     options: {
       animation: {easing: 'out'},
-      //width: 50%, height: 50%,
       greenFrom: 1, greenTo: 60,
       yellowFrom: 60, yellowTo: 110,
       redFrom: 110, redTo:220,
       minorTicks: 10,
-      min: 0, max: 220,
+      min: 0, max: 160,
       greenColor: '#019875',
       yellowColor: '#F9BF3B',
       redColor: '#EF4836',
@@ -48,12 +51,9 @@ export class HomePage {
     dataTable: [
       ['Label', 'Value'],
       ['Temp.', 0],
-
-
     ],
     options: {
       animation: {easing: 'out'},
-      //width: 50%, height: 50%,
       greenFrom: 1, greenTo: 60,
       yellowFrom: 60, yellowTo: 110,
       redFrom: 110, redTo:420,
@@ -64,31 +64,102 @@ export class HomePage {
       redColor: '#EF4836',
     }
   };
+
+  rpmChartData:any =  {
+    chartType: 'Gauge',
+    dataTable: [
+      ['Label', 'Value'],
+      ['RPM', 0],
+    ],
+    options: {
+      animation: {easing: 'out'},
+      greenFrom: 0, greenTo: 2000,
+      yellowFrom: 2000, yellowTo: 4000,
+      redFrom: 4000, redTo:5178,
+      min: -0, max: 5178,
+      greenColor: '#019875',
+      yellowColor: '#F9BF3B',
+      redColor: '#EF4836',
+    }
+  };
+
+  loadChartData:any =  {
+    chartType: 'Gauge',
+    dataTable: [
+      ['Label', 'Value'],
+      ['Load %', 0],
+    ],
+    options: {
+      animation: {easing: 'out'},
+      greenFrom: 0, greenTo: 50,
+      yellowFrom: 50, yellowTo: 75,
+      redFrom: 75, redTo:100,
+      min: 0, max: 100,
+      greenColor: '#019875',
+      yellowColor: '#F9BF3B',
+      redColor: '#EF4836',
+    }
+  };
+
+
+  mapChartData:any =  {
+    chartType: 'Gauge',
+    dataTable: [
+      ['Label', 'Value'],
+      ['Intake kPa.', 0],
+    ],
+    options: {
+      animation: {easing: 'out'},
+      greenFrom: 0, greenTo: 50,
+      yellowFrom: 50, yellowTo: 150,
+      redFrom: 150, redTo:255,
+      min: 0, max: 255,
+      greenColor: '#019875',
+      yellowColor: '#F9BF3B',
+      redColor: '#EF4836',
+    }
+  };
+
+
+  fuelChartData:any =  {
+    chartType: 'Gauge',
+    dataTable: [
+      ['Label', 'Value'],
+      ['Fuel kPa.', 0],
+    ],
+    options: {
+      animation: {easing: 'out'},
+      greenFrom: 0, greenTo: 150,
+      yellowFrom: 150, yellowTo: 500,
+      redFrom: 500, redTo:765,
+      min: 0, max: 765,
+      greenColor: '#019875',
+      yellowColor: '#F9BF3B',
+      redColor: '#EF4836',
+    }
+  };
+
+
+
   
   
   change() {
-    this.changeSpeed();
-    this.changeTemp();
+    this.changeChart(this.speedChart,0,220);
+    this.changeChart(this.tempChart,-40,420);
+    this.changeChart(this.rpmChart,0,5178);
+    this.changeChart(this.loadChart,0,100);
+    this.changeChart(this.mapChart,0,255);
+    this.changeChart(this.fuelChart,0,765);
+   
   }
 
-  changeSpeed() {
-    let min = 0;
-    let max = 220;
+  changeChart (chart, min, max) {
     let val = Math.floor(Math.random() * (max - min)) + min;
-    let data = this.speedChart.wrapper.getDataTable();
+    let data = chart.wrapper.getDataTable();
     data.setValue(0,1,val);
-    this.speedChart.redraw();
+    chart.redraw();
   }
 
-  changeTemp() {
-    let min = -40;
-    let max = 420;
-    let val = Math.floor(Math.random() * (max - min)) + min;
-    let data = this.tempChart.wrapper.getDataTable();
-    data.setValue(0,1,val);
-    console.log (JSON.stringify(data));
-    this.tempChart.redraw();
-  }
 
   ready(event: ChartReadyEvent) {
     
@@ -99,6 +170,8 @@ export class HomePage {
     var OBDReader = require('obd-bluetooth-tcp');
     wifiOBDReader = new OBDReader();
     var instance = this;
+
+    //console.log (JSON.stringify(wifiOBDReader.getPIDObjectByName('vss')));
 
 
     // set up handlers one time
@@ -126,14 +199,49 @@ export class HomePage {
           instance.tempChart.redraw(); }, 0);
       
       }
+
+      if (data.name && data.name == 'rpm') {
+        setTimeout(() => { 
+          let data = instance.rpmChart.wrapper.getDataTable();
+          data.setValue(0,1,parseInt(data.value));
+          instance.rpmChart.redraw(); }, 0);
+      }
+
+      if (data.name && data.name == 'load_pct') {
+        setTimeout(() => { 
+          let data = instance.loadChart.wrapper.getDataTable();
+          data.setValue(0,1,parseInt(data.value));
+          instance.loadChart.redraw(); }, 0);
+      }
+
+      if (data.name && data.name == 'map') {
+        setTimeout(() => { 
+          let data = instance.mapChart.wrapper.getDataTable();
+          data.setValue(0,1,parseInt(data.value));
+          instance.mapChart.redraw(); }, 0);
+      }
+
+      if (data.name && data.name == 'frp') {
+        setTimeout(() => { 
+          let data = instance.fuelChart.wrapper.getDataTable();
+          data.setValue(0,1,parseInt(data.value));
+          instance.fuelChart.redraw(); }, 0);
+      }
+
+
     })
 
     wifiOBDReader.on('connected', function () {
       console.log("=>APP: Connected");
       this.stopPolling();
       this.removeAllPollers();
-      this.addPoller("temp");
-      this.addPoller("vss");
+      this.addPoller("vss"); // 0,220 mph
+      this.addPoller("temp"); // -40,215 C
+      this.addPoller("rpm"); // 0, 5178
+      this.addPoller("load_pct"); // 0,100%
+      this.addPoller("map");// 0,255 kPa
+      this.addPoller("frp"); // fuel pressure , 0,765 kPa
+  
       console.log("=======>ON START WE HAVE " + this.getNumPollers() + " pollers");
       this.startPolling(2000); //Request  values every 2 second.
 
@@ -144,6 +252,7 @@ export class HomePage {
 
   } // constructor
 
+  
   start() {
     console.log(this.host);
     this.plt.ready().then(() => {

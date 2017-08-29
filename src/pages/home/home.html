@@ -16,20 +16,33 @@
   </ion-list>
 
 
-  <button ion-button (click)="start()">Start</button><button ion-button (click)="stop()" color="danger">Stop</button><button ion-button (click)="change()">Change</button>
-
-
-
-  <br/>
-
+  <div text-center>
+    <button ion-button (click)="start()">Start</button><button ion-button (click)="stop()" color="danger">Stop</button><button ion-button (click)="change()" color="dark">Randomize</button>
+  </div>
 
   <ion-grid>
-    <ion-row wrap>
+    <ion-row>
       <ion-col col-50>
-         <google-chart #speed [data]="gaugeChartData" (chartReady)="ready($event)"></google-chart>
+         <google-chart #speed [data]="speedChartData" (chartReady)="ready($event)"></google-chart>
       </ion-col>
       <ion-col col-50>
          <google-chart #temp [data]="tempChartData" (chartReady)="ready($event)"></google-chart>
+      </ion-col>
+      </ion-row>
+    <ion-row>
+      <ion-col col-50>
+         <google-chart #rpm [data]="rpmChartData" (chartReady)="ready($event)"></google-chart>
+      </ion-col>
+      <ion-col col-50>
+         <google-chart #load [data]="loadChartData" (chartReady)="ready($event)"></google-chart>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-50>
+         <google-chart #map [data]="mapChartData" (chartReady)="ready($event)"></google-chart>
+      </ion-col>
+      <ion-col col-50>
+         <google-chart #fuel [data]="fuelChartData" (chartReady)="ready($event)"></google-chart>
       </ion-col>
     </ion-row>
   </ion-grid>
