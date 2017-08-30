@@ -3,5 +3,6 @@ Uses https://github.com/hsccorp/node-bluetooth-tcp-obd
 
 Screenshots
 ------------
-<img src="https://github.com/hsccorp/obd-tcp-test/raw/master/screenshots/2.PNG" height="600px"/>
+<!--img src="https://github.com/hsccorp/obd-tcp-test/raw/master/screenshots/2.PNG" height="600px"/>-->
+![Anim](https://media.giphy.com/media/3ohhwAso76rEAkZrhu/giphy.gif)
 

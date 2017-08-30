@@ -23,28 +23,27 @@
   <ion-grid>
     <ion-row>
       <ion-col col-50>
-         <google-chart #speed [data]="speedChartData" (chartReady)="ready($event)"></google-chart>
+         <google-chart #speed [data]="speedChartData" ></google-chart>
       </ion-col>
       <ion-col col-50>
-         <google-chart #temp [data]="tempChartData" (chartReady)="ready($event)"></google-chart>
+         <google-chart #temp [data]="tempChartData"></google-chart>
       </ion-col>
       </ion-row>
     <ion-row>
       <ion-col col-50>
-         <google-chart #rpm [data]="rpmChartData" (chartReady)="ready($event)"></google-chart>
+         <google-chart #rpm [data]="rpmChartData"></google-chart>
       </ion-col>
       <ion-col col-50>
-         <google-chart #load [data]="loadChartData" (chartReady)="ready($event)"></google-chart>
+         <google-chart #load [data]="loadChartData"></google-chart>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-50>
-         <google-chart #map [data]="mapChartData" (chartReady)="ready($event)"></google-chart>
+         <google-chart #map [data]="mapChartData"></google-chart>
       </ion-col>
       <ion-col col-50>
-         <google-chart #fuel [data]="fuelChartData" (chartReady)="ready($event)"></google-chart>
+         <google-chart #fuel [data]="fuelChartData"></google-chart>
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>
