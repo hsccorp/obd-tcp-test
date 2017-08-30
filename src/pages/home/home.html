@@ -23,26 +23,26 @@
   <ion-grid>
     <ion-row>
       <ion-col col-50>
-         <google-chart #speed [data]="speedChartData" ></google-chart>
+         <google-chart #speed [data]="graphs.speedChartData" ></google-chart>
       </ion-col>
       <ion-col col-50>
-         <google-chart #temp [data]="tempChartData"></google-chart>
+         <google-chart #temp [data]="graphs.tempChartData"></google-chart>
       </ion-col>
       </ion-row>
     <ion-row>
       <ion-col col-50>
-         <google-chart #rpm [data]="rpmChartData"></google-chart>
+         <google-chart #rpm [data]="graphs.rpmChartData"></google-chart>
       </ion-col>
       <ion-col col-50>
-         <google-chart #load [data]="loadChartData"></google-chart>
+         <google-chart #load [data]="graphs.loadChartData"></google-chart>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-50>
-         <google-chart #map [data]="mapChartData"></google-chart>
+         <google-chart #map [data]="graphs.mapChartData"></google-chart>
       </ion-col>
       <ion-col col-50>
-         <google-chart #fuel [data]="fuelChartData"></google-chart>
+         <google-chart #fuel [data]="graphs.fuelChartData"></google-chart>
       </ion-col>
     </ion-row>
   </ion-grid>

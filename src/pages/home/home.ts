@@ -1,7 +1,6 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
-
-import * as graphs from './graphDefs';
+import {Graphs} from './graphDefs';
 //declare var RadialGauge;
 var wifiOBDReader;
 
@@ -30,13 +29,15 @@ export class HomePage {
   mapChartData:any;
   fuelChartData:any;
 
+  graphs:any;
+
   change() {
-    this.changeChart(this.speedChart, this.speedChartData.options.min,this.speedChartData.options.max);
-    this.changeChart(this.tempChart,this.tempChartData.options.min,this.tempChartData.options.max);
-    this.changeChart(this.rpmChart,this.rpmChartData.options.min,this.rpmChartData.options.max);
-    this.changeChart(this.loadChart,this.loadChartData.options.min,this.loadChartData.options.max);
-    this.changeChart(this.mapChart,this.mapChartData.options.min,this.mapChartData.options.max,);
-    this.changeChart(this.fuelChart,this.fuelChartData.options.min,this.fuelChartData.options.max);
+    this.changeChart(this.speedChart, this.graphs.speedChartData.options.min,this.graphs.speedChartData.options.max);
+    this.changeChart(this.tempChart,this.graphs.tempChartData.options.min,this.graphs.tempChartData.options.max);
+    this.changeChart(this.rpmChart,this.graphs.rpmChartData.options.min,this.graphs.rpmChartData.options.max);
+    this.changeChart(this.loadChart,this.graphs.loadChartData.options.min,this.graphs.loadChartData.options.max);
+    this.changeChart(this.mapChart,this.graphs.mapChartData.options.min,this.graphs.mapChartData.options.max,);
+    this.changeChart(this.fuelChart,this.graphs.fuelChartData.options.min,this.graphs.fuelChartData.options.max);
    
   }
   changeChart (chart, min, max) {
@@ -45,17 +46,12 @@ export class HomePage {
     data.setValue(0,1,val);
     chart.redraw();
   }
-  constructor(public navCtrl: NavController, public plt: Platform, public zone: NgZone) {
+  constructor(public navCtrl: NavController, public plt: Platform,) {
 
+    this.graphs = new Graphs();
     var OBDReader = require('obd-bluetooth-tcp');
     wifiOBDReader = new OBDReader();
     var instance = this;
-    this.speedChartData = graphs.speedChartData;
-    this.tempChartData = graphs.tempChartData;
-    this.rpmChartData = graphs.rpmChartData;
-    this.loadChartData = graphs.loadChartData;
-    this.mapChartData = graphs.mapChartData;
-    this.fuelChartData = graphs.fuelChartData;
 
     //console.log (JSON.stringify(wifiOBDReader.getPIDObjectByName('vss')));
     // set up handlers one time
