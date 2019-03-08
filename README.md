@@ -8,12 +8,16 @@ Screenshots
 
 Building Process
 ------------
-git clone https://github.com/hsccorp/obd-tcp-test.git
-cd obd-tcp-test
-npm install -g ionic cordova
+`git clone https://github.com/hsccorp/obd-tcp-test.git`
+
+`cd obd-tcp-test`
+
+`npm install -g ionic cordova`
 
 ### ios building
-ionic cordova build ios -- --buildFlag="-UseModernBuildSystem=0"
+
+`ionic cordova build ios -- --buildFlag="-UseModernBuildSystem=0"`
 
 ### android building
-ionic corodva build android
+
+`ionic corodva build android`
